@@ -72,7 +72,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>emall-service</finalName>
+        <finalName>parker</finalName>
     </build>
 
 </project>
