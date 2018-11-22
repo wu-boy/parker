@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 从spring-boot-starter-parent继承版本号 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 定义当前Maven项目隶属的实际项目 -->
+    <!-- 首先，Maven项目和实际项目不一定是一对一的关系，一个项目往往会被分为很多模块 -->
+    <!-- 其次，groupId不应该对应项目隶属的组织或公司，一个组织可能会有很多实际项目 -->
+    <groupId>com.wu.parker</groupId>
+
+    <!-- 定义实际项目中的一个Maven项目，推荐做法是使用实际项目名称作为artifactId的前缀 -->
+    <!-- 本项目将包含多个模块，因此作为总项目 -->
+    <artifactId>parker</artifactId>
+
+    <version>0.0.1-SNAPSHOT</version>
+
+    <modules>
+        <module>parker-jpa</module>
+    </modules>
+
+    <!-- 定义Maven项目的打包方式，默认为jar -->
+    <!-- 对于聚合模块来说，必须是pom，否则无法构建 -->
+    <packaging>pom</packaging>
+
+    <!-- 给项目提供一个更易阅读的名字 -->
+    <name>${project.artifactId}</name>
+
+    <description>spring boot demo</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <postgresql.version>42.2.5</postgresql.version>
+    </properties>
+
+    <!-- 继承的依赖 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <!-- 依赖范围，默认为compile，此处为test，只对测试有效 -->
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- dependencyManagement既能让子模块继承到父模块的依赖配置，又能保证子模块依赖使用的灵活性 -->
+    <!-- dependencyManagement下的依赖声明不会引入实际的依赖，不过它能约束dependencies下的依赖使用 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>emall-service</finalName>
+    </build>
+
+</project>
