@@ -5,4 +5,10 @@
         insert into user_test(id,username,password)values(#{id},#{username},#{password})
     </insert>
 
+    <delete id="batchDelete" parameterType="string">
+        delete from user_test where id in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

@@ -31,4 +31,11 @@ public class UserMapperTest {
         user.setPassword("admin");
         System.out.println(userMapper.save(user));
     }
+
+    @Test
+    public void testBatchDelete() throws Exception {
+        String[] ids = new String[1];
+        ids[0] = "1";
+        userMapper.batchDelete(ids);
+    }
 }
