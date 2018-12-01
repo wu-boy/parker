@@ -28,6 +28,7 @@
         <module>parker-common</module>
         <module>parker-jpa</module>
         <module>parker-mybatis</module>
+        <module>parker-jpa-mybatis</module>
     </modules>
 
     <!-- 定义Maven项目的打包方式，默认为jar -->

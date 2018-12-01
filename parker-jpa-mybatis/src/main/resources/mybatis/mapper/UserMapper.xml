@@ -1,0 +1,14 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wu.parker.jpamybatis.dao.UserMapper">
+
+    <insert id="save" parameterType="user">
+        insert into user_test(id,username,password)values(#{id},#{username},#{password})
+    </insert>
+
+    <delete id="batchDelete" parameterType="string">
+        delete from user_test where id in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
