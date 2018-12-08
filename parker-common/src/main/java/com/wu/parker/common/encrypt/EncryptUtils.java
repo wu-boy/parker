@@ -1,5 +1,8 @@
 package com.wu.parker.common.encrypt;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -7,41 +10,42 @@ import java.security.NoSuchAlgorithmException;
 /**
  * 加解密工具类
  * @author: wusq
- * @date: 2018/11/26
+ * @date: 2018/12/8
  */
 public class EncryptUtils {
 
     /**
-     * 默认散列次数
+     * 默认加密次数
      */
-    public static final Integer HASH_ITERATIONS = 1;
+    public static final Integer DEFAULT_ITERATIONS = 1;
 
     /**
-     * Shiro的MD5加密
-     * @param password 密码
+     * Shiro的MD5加密，加密方式是对字符串salt+password进行加密
      * @param salt 盐
+     * @param password 密码
      * @return
      */
-    /*public static String shiroMd5(String password, String salt){
-        String algorithmName = "md5";
+    public static String shiroMd5(String salt, String password){
+        String algorithmName = "MD5";
         ByteSource byteSalt = ByteSource.Util.bytes(salt);
-        SimpleHash simpleHash = new SimpleHash(algorithmName, password, byteSalt, HASH_ITERATIONS);
+        SimpleHash simpleHash = new SimpleHash(algorithmName, password, byteSalt, DEFAULT_ITERATIONS);
         return simpleHash.toHex();
-    }*/
+    }
 
     /**
-     * Java的MD5加密
+     * Java的MD5加密，加密方式是对字符串salt+password进行加密
+     * @param salt 盐
      * @param password
      * @return
      */
-    public static String md5(String password){
+    public static String md5(String salt, String password){
         String result = null;
         byte[] bytes = null;
         try {
             // 生成一个MD5加密计算摘要
             MessageDigest md = MessageDigest.getInstance("MD5");
             // 对字符串进行加密
-            md.update(password.getBytes());
+            md.update((salt + password).getBytes());
             // 获得加密后的数据
             bytes = md.digest();
 
@@ -58,14 +62,14 @@ public class EncryptUtils {
     }
 
     public static void main(String[] args) {
-        /*String password = md5("admin" + "admin");
-        System.out.println(password);
-        String newPassword = md5(password + "f487629c56eb4d3096800c05efb621f5");
-        System.out.println(newPassword);*/
 
-        String password = md5("admin" + "12345678");
-        System.out.println(password);
-        String newPassword = md5(password + "0c3c948d968a4a40b8473557d2889aa2");
-        System.out.println(newPassword);
+        String password1 = shiroMd5("admin", "12345678");
+        System.out.println(password1);
+
+        String password2 = md5("admin", "12345678");
+        System.out.println(password2);
+
+        // 两者加密结果相同
+        System.out.println(password1.equals(password2));
     }
 }

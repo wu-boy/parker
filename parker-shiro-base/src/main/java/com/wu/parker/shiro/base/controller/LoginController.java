@@ -37,7 +37,10 @@ public class LoginController {
     public User login(@PathVariable String username, @PathVariable String password){
         User result = null;
         Subject subject = SecurityUtils.getSubject();
+
+        // 此处的密码应该是按照后台的加密规则加密过的，不应该传输明文密码
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+
         try {
             subject.login(token);
             result = userService.findByUsername(username);

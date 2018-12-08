@@ -29,10 +29,6 @@ public class User {
     @JoinColumn(name="role_id")
     private Role role;
 
-    public String getCredentialsSalt(){
-        return this.username;
-    }
-
     public String getId() {
         return id;
     }

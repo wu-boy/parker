@@ -6,4 +6,5 @@ insert into role_test(id,code,name)values('4028b2ea66f0f25d0166f0f27be90000','ad
 
 insert into role_permission_test(role_id,permission_id)values('4028b2ea66f0f25d0166f0f27be90000','4028b2ea66f0f1240166f0f14a170001');
 
+-- 密码是MD5(admin+12345678)
 insert into user_test(id,username,password,role_id)values('4028b2ea66f102b60166f102d5230000','admin','3a4ebf16a4795ad258e5408bae7be341','4028b2ea66f0f25d0166f0f27be90000');
