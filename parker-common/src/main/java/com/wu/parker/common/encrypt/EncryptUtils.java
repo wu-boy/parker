@@ -17,6 +17,19 @@ public class EncryptUtils {
     public static final Integer HASH_ITERATIONS = 1;
 
     /**
+     * Shiro的MD5加密
+     * @param password 密码
+     * @param salt 盐
+     * @return
+     */
+    /*public static String shiroMd5(String password, String salt){
+        String algorithmName = "md5";
+        ByteSource byteSalt = ByteSource.Util.bytes(salt);
+        SimpleHash simpleHash = new SimpleHash(algorithmName, password, byteSalt, HASH_ITERATIONS);
+        return simpleHash.toHex();
+    }*/
+
+    /**
      * Java的MD5加密
      * @param password
      * @return

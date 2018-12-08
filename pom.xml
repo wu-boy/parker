@@ -31,6 +31,7 @@
         <module>parker-mybatis</module>
         <module>parker-redis</module>
         <module>parker-rest</module>
+        <module>parker-shiro-base</module>
     </modules>
 
     <!-- 定义Maven项目的打包方式，默认为jar -->
@@ -53,6 +54,7 @@
         <jackson.version>2.9.7</jackson.version>
         <mybatis.starter.version>1.3.2</mybatis.starter.version>
         <postgresql.version>42.2.5</postgresql.version>
+        <shiro.starter.version>1.4.0</shiro.starter.version>
         <swagger.version>2.7.0</swagger.version>
     </properties>
 
@@ -104,6 +106,11 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring-boot-web-starter</artifactId>
+                <version>${shiro.starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
