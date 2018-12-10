@@ -32,6 +32,7 @@
         <module>parker-redis</module>
         <module>parker-rest</module>
         <module>parker-shiro-base</module>
+        <module>parker-websocket</module>
     </modules>
 
     <!-- 定义Maven项目的打包方式，默认为jar -->
