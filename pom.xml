@@ -32,6 +32,7 @@
         <module>parker-redis</module>
         <module>parker-rest</module>
         <module>parker-shiro-base</module>
+        <module>parker-shiro-stateless</module>
         <module>parker-websocket</module>
     </modules>
 
