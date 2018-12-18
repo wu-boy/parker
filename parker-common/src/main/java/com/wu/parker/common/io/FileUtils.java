@@ -11,12 +11,13 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * 文件工具类
  * @author wusq
- * @date 2018-07-12
+ * @date 2018-12-18
  */
 public class FileUtils {
 
@@ -215,6 +216,38 @@ public class FileUtils {
     }
 
     /**
+     * 去除字符串中的空格、回车、换行符、制表符
+     * @param str
+     * @param pattern "\\s*|\n|\r|\t"
+     * @return
+     */
+    public static String replaceAll(String str, String pattern){
+        String result = null;
+        if(StringUtils.isNotBlank(str)){
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(str);
+            result = m.replaceAll("");
+        }
+        return result;
+    }
+
+    /**
+     * 将文件转为UTF8文件
+     * @param sourceFile
+     * @param encode
+     * @param utf8File
+     */
+    /*public static void toUtf8(String sourceFile, String encode, String utf8File){
+        File gbk = new File(sourceFile);
+        try {
+            String content = org.apache.commons.io.FileUtils.readFileToString(gbk, encode);
+            write(utf8File, content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    /**
      * 覆盖写入文件
      * @param path 文件路径
      * @param lines 内容
@@ -267,18 +300,10 @@ public class FileUtils {
 
     public static void main(String[] args) {
 
-        removeChinese(args[0], args[1]);
-
-        //toUtf8(args[0], args[1], args[2]);
-
-        /*List<String> list = null;
-        if("gbk".equals(args[1])){
-            list = readLines(args[0], Charset.forName("gbk"));
-        }else if("utf8".equals(args[1])){
-            list = readLines(args[0], Charsets.UTF_8);
-        }
-        list.forEach(s -> System.out.println(s));*/
-
+        StringBuilder sb = new StringBuilder();
+        List<String> list = read("d:/test/公路运输费用例子.txt");
+        list.forEach(s -> sb.append(s));
+        System.out.println(replaceAll(sb.toString(), "\\s*|\n|\r|\t"));
     }
 
 }
