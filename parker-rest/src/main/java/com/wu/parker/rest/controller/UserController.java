@@ -12,14 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: wusq
- * @date: 2018/12/5
+ * @date: 2018/12/20
  */
 @Api(description = "用户服务")
 @RestController
@@ -51,6 +48,44 @@ public class UserController {
             result.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             result.setMessage(e.getMessage());
             log.error("新增用户错误{}", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @ApiOperation("根据ID查询用户")
+    @GetMapping("get/{id}")
+    public BaseResult get(@PathVariable String id){
+        BaseResult result = new BaseResult();
+        try {
+            User o = new User();
+            o.setId("1");
+            o.setUsername("admin");
+            o.setPassword("123456");
+
+            if("1".equals(id)){
+                result.setData(o);
+            }
+        } catch (Exception e) {
+            result.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            result.setMessage(e.getMessage());
+            log.error("根据ID查询用户错误{}", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @ApiOperation("测试token")
+    @GetMapping("test")
+    public BaseResult test(@RequestHeader("token") String token){
+        BaseResult result = new BaseResult();
+        try {
+            System.out.println(token);
+            result.setData(token);
+        } catch (Exception e) {
+            result.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            result.setMessage(e.getMessage());
+            log.error("根据ID查询用户错误{}", e.getMessage());
             e.printStackTrace();
         }
         return result;

@@ -1,0 +1,5 @@
+server:
+  port: 8081
+feign:
+  client:
+    url: http://localhost:8080/security/user
