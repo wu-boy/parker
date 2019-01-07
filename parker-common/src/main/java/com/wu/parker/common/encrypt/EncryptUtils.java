@@ -1,5 +1,6 @@
 package com.wu.parker.common.encrypt;
 
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
@@ -10,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * 加解密工具类
  * @author: wusq
- * @date: 2018/12/8
+ * @date: 2019/1/7
  */
 public class EncryptUtils {
 
@@ -30,6 +31,16 @@ public class EncryptUtils {
         ByteSource byteSalt = ByteSource.Util.bytes(salt);
         SimpleHash simpleHash = new SimpleHash(algorithmName, password, byteSalt, DEFAULT_ITERATIONS);
         return simpleHash.toHex();
+    }
+
+    /**
+     * SHA-256加密
+     * @param password
+     * @return
+     */
+    public static String shiroSha256(String password){
+        Sha256Hash sha256Hash = new Sha256Hash(password);
+        return sha256Hash.toHex();
     }
 
     /**
@@ -63,6 +74,7 @@ public class EncryptUtils {
 
     public static void main(String[] args) {
 
+        /*// MD5加密测试
         String password1 = shiroMd5("admin", "12345678");
         System.out.println(password1);
 
@@ -70,6 +82,10 @@ public class EncryptUtils {
         System.out.println(password2);
 
         // 两者加密结果相同
-        System.out.println(password1.equals(password2));
+        System.out.println(password1.equals(password2));*/
+
+
+        // SHA-256加密测试
+        System.out.println(shiroSha256("12345678"));
     }
 }
