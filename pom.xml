@@ -36,6 +36,7 @@
         <module>parker-shiro-base</module>
         <module>parker-shiro-stateless</module>
         <module>parker-websocket</module>
+        <module>parker-schedule</module>
     </modules>
 
     <!-- 定义Maven项目的打包方式，默认为jar -->
