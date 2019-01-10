@@ -11,4 +11,9 @@
             #{item}
         </foreach>
     </delete>
+
+    <delete id="executeManySql">
+        delete from user_test where id='1';
+        delete from user_test where id='2';
+    </delete>
 </mapper>

@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author: wusq
- * @date: 2018/11/28
+ * @date: 2019/1/10
  */
 @Mapper
 public interface UserMapper {
@@ -24,4 +24,9 @@ public interface UserMapper {
      * @param ids
      */
     void batchDelete(String[] ids);
+
+    /**
+     * 执行多条SQL语句
+     */
+    void executeManySql();
 }
