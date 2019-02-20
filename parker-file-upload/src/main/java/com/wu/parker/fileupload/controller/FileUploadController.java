@@ -23,7 +23,7 @@ import java.nio.file.Paths;
 @RequestMapping("file/")
 public class FileUploadController {
 
-    private static final String FILE_PATH = "D:/test";
+    private static final String FILE_PATH = "D:/test/";
 
     @ApiOperation("上传文件")
     @PostMapping("upload")
@@ -47,7 +47,7 @@ public class FileUploadController {
             // 随机生成一个名字
             String randomName = RandomUtils.uuidWithoutBar();
 
-            Path path = Paths.get(FILE_PATH + File.separator + randomName + suffixName);
+            Path path = Paths.get(FILE_PATH + randomName + suffixName);
             Files.write(path, bytes);
 
             result.setData(1);
@@ -69,7 +69,7 @@ public class FileUploadController {
         BaseResult result = new BaseResult();
 
         try {
-            File file = new File(FILE_PATH + File.separator + filename);
+            File file = new File(FILE_PATH + filename);
             file.delete();
 
             result.setData(1);
