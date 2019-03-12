@@ -4,6 +4,7 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -60,7 +61,64 @@ public class MyDateUtils {
         return result;
     }
 
-    public static void main(String[] args) {
+    /**
+     * 获取日期是周几
+     * @param date
+     * @return
+     */
+    public static Integer getWeekDay(Date date){
+        int result = 0;
+        if(date == null){
+            return result;
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        result = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        return result;
+    }
 
+    /**
+     * 判断是否是工作日
+     * @param date
+     * @return
+     */
+    public static boolean isWorkDay(Date date){
+        Boolean result = null;
+        if(date == null){
+            return result;
+        }
+        int weekday = getWeekDay(date);
+        if(1 <= weekday && weekday <= 5){
+            result = Boolean.TRUE;
+        }else{
+            result = Boolean.FALSE;
+        }
+        return result;
+    }
+
+    /**
+     * 获取日期的下一个工作日
+     * @param date
+     * @return
+     */
+    public static Date getNextWorkDay(Date date){
+        Date result = null;
+        if(date == null){
+            return result;
+        }
+        while(Boolean.TRUE){
+            Date d = DateUtils.addDays(date, 1);
+            if(isWorkDay(d)){
+                result = d;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) throws Exception{
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DAY);
+        Date date = sdf.parse("2019-03-16");
+        System.out.println(getWeekDay(date));
     }
 }
