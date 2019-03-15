@@ -1,4 +1,4 @@
-package com.wu.parker.email.pojo.dto;
+package com.wu.parker.mail.pojo.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
  * @date 2019/3/15
  */
 @ApiModel("邮件参数")
-public class EmailMessageDto {
+public class MailMessageDto {
 
     @ApiModelProperty("收件人")
     @NotBlank(message = "收件人不能为空")

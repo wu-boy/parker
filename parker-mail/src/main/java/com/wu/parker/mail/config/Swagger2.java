@@ -1,4 +1,4 @@
-package com.wu.parker.email.config;
+package com.wu.parker.mail.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

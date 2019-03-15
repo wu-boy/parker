@@ -1,7 +1,7 @@
-package com.wu.parker.email.controller;
+package com.wu.parker.mail.controller;
 
 import com.wu.parker.common.web.BaseResult;
-import com.wu.parker.email.pojo.dto.EmailMessageDto;
+import com.wu.parker.mail.pojo.dto.MailMessageDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -28,12 +28,12 @@ import javax.mail.internet.MimeMessage;
  * @author wusq
  * @date 2019/3/15
  */
-@Api(description = "Email服务")
+@Api(description = "邮件服务")
 @RestController
-@RequestMapping("email")
-public class EmailController {
+@RequestMapping("mail")
+public class MailController {
 
-    private static final Logger log = LoggerFactory.getLogger(EmailController.class);
+    private static final Logger log = LoggerFactory.getLogger(MailController.class);
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -46,7 +46,7 @@ public class EmailController {
 
     @ApiOperation("发送邮件")
     @PostMapping("send")
-    public BaseResult send(@RequestBody @Validated EmailMessageDto dto, BindingResult bindingResult){
+    public BaseResult send(@RequestBody @Validated MailMessageDto dto, BindingResult bindingResult){
         BaseResult result = new BaseResult();
 
         // 校验参数
@@ -78,7 +78,7 @@ public class EmailController {
 
     @ApiOperation("发送HTML格式的邮件")
     @PostMapping("send/html")
-    public BaseResult sendHtml(@RequestBody @Validated EmailMessageDto dto, BindingResult bindingResult){
+    public BaseResult sendHtml(@RequestBody @Validated MailMessageDto dto, BindingResult bindingResult){
         BaseResult result = new BaseResult();
 
         // 校验参数

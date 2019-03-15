@@ -1,4 +1,4 @@
-package com.wu.parker.email;
+package com.wu.parker.mail;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2019/3/15
  */
 @SpringBootApplication
-public class EmailApplication {
+public class MailApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EmailApplication.class, args);
+        SpringApplication.run(MailApplication.class, args);
     }
 }

@@ -28,7 +28,7 @@
         <module>parker-common</module>
         <module>parker-config</module>
         <module>parker-easypoi</module>
-        <module>parker-email</module>
+        <module>parker-mail</module>
         <module>parker-feign</module>
         <module>parker-file-upload</module>
         <module>parker-jpa</module>
