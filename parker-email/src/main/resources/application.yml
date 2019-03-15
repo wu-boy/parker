@@ -1,0 +1,5 @@
+spring:
+  mail:
+    host: smtp.mxhichina.com
+    username: XXX@OOO.cn
+    password: 12345678
