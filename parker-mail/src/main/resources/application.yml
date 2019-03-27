@@ -3,3 +3,15 @@ spring:
     host: smtp.mxhichina.com
     username: XXX@OOO.cn
     password: 12345678
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: smtp.mxhichina.com
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+          auth: true
+          starttls:
+            enable: true
+            required: true
