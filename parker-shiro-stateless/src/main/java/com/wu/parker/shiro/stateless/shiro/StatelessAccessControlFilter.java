@@ -1,9 +1,9 @@
 package com.wu.parker.shiro.stateless.shiro;
 
-import com.sun.deploy.net.HttpRequest;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -13,8 +13,8 @@ import java.io.IOException;
 
 /**
  * 访问控制过滤器
- * @author: wusq
- * @date: 2018/12/10
+ * @author wusq
+ * @date 2019/3/28
  */
 public class StatelessAccessControlFilter extends AccessControlFilter {
 
@@ -29,7 +29,19 @@ public class StatelessAccessControlFilter extends AccessControlFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object o) throws Exception {
-        return false;
+
+        /**
+         * 是在跨域访问的场景下，正式访问之前增加一次预检性质访问，以确定能否正确获取所请求的资源。
+         * 会被Shiro拦截
+         * 下面代码让Shiro过滤掉OPTIONS请求
+         */
+        if (request instanceof HttpServletRequest) {
+            if (((HttpServletRequest) request).getMethod().equals(RequestMethod.OPTIONS.name())) {
+                return Boolean.TRUE;
+            }
+        }
+
+        return Boolean.FALSE;
     }
 
     /**
@@ -40,7 +52,6 @@ public class StatelessAccessControlFilter extends AccessControlFilter {
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest r = (HttpServletRequest)request;
         String token = r.getHeader("token");
-        log.info("token===================================={}", token);
         // 生成无状态Token
         StatelessAuthenticationToken statelessToken = new StatelessAuthenticationToken(token);
         try {
@@ -50,9 +61,9 @@ public class StatelessAccessControlFilter extends AccessControlFilter {
             e.printStackTrace();
             // 登录失败
             onLoginFail(response);
-            return false;//就直接返回给请求者.
+            return Boolean.FALSE;//就直接返回给请求者.
         }
-        return true;
+        return Boolean.TRUE;
     }
 
     /**
@@ -62,7 +73,6 @@ public class StatelessAccessControlFilter extends AccessControlFilter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         httpResponse.getWriter().write("login error");
-
     }
 
 }
