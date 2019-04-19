@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 时间工具类
  * @author wusq
- * @date 2018/12/3
+ * @date 2019/4/18
  */
 public class MyDateUtils {
 
@@ -21,7 +21,6 @@ public class MyDateUtils {
     public static final String WEEK = "week";
     public static final String MONTH = "month";
     public static final String YEAR = "year";
-
 
     /**
      * 根据结束时间获取开始时间
@@ -97,28 +96,70 @@ public class MyDateUtils {
     }
 
     /**
-     * 获取日期的下一个工作日
+     * 获取某日期下一个工作日
      * @param date
-     * @return
+     * @return Date
      */
-    public static Date getNextWorkDay(Date date){
+    public static Date getNextWorkDate(Date date){
         Date result = null;
         if(date == null){
             return result;
         }
         while(Boolean.TRUE){
-            Date d = DateUtils.addDays(date, 1);
-            if(isWorkDay(d)){
-                result = d;
+            date = DateUtils.addDays(date, 1);
+            if(isWorkDay(date)){
+                result = date;
                 break;
             }
         }
         return result;
     }
 
-    public static void main(String[] args) throws Exception{
+    /**
+     * 获取某日期下一个工作日
+     * @param date
+     * @return String
+     */
+    public static String getNextWorkDay(Date date){
+        String result = null;
+        Date nextWorkDate = getNextWorkDate(date);
+        if(nextWorkDate != null){
+            SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DAY);
+            result = sdf.format(nextWorkDate);
+        }
+        return result;
+    }
+
+    /**
+     * 获取当月第一天的日期
+     * @return string
+     */
+    public static String getMonthFirstDay(){
+        String result = null;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
         SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DAY);
-        Date date = sdf.parse("2019-03-16");
-        System.out.println(getWeekDay(date));
+        result = sdf.format(calendar.getTime());
+        return result;
+    }
+
+    /**
+     * 获取当月第一天的日期
+     * @return date
+     */
+    public static Date getMonthFirstDate(){
+        Date result = null;
+        String day = getMonthFirstDay();
+        SimpleDateFormat sdf = new SimpleDateFormat(MyDateUtils.FORMAT_DAY);
+        try {
+            result = sdf.parse(day);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static void main(String[] args) throws Exception{
+        System.out.println(getMonthFirstDay());
     }
 }
