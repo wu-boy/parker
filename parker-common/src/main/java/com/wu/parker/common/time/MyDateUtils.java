@@ -169,6 +169,11 @@ public class MyDateUtils {
      */
     public static List<Date> listDates(Date beginDate, Date endDate){
         List<Date> result = new ArrayList<>();
+
+        // 需要将日期的时分秒清零
+        beginDate = clearHms(beginDate);
+        endDate = clearHms(endDate);
+
         result.add(beginDate);
         Date tmp = beginDate;
         Calendar calendar = Calendar.getInstance();
