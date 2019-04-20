@@ -4,13 +4,15 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 时间工具类
  * @author wusq
- * @date 2019/4/18
+ * @date 2019/4/20
  */
 public class MyDateUtils {
 
@@ -153,6 +155,58 @@ public class MyDateUtils {
         SimpleDateFormat sdf = new SimpleDateFormat(MyDateUtils.FORMAT_DAY);
         try {
             result = sdf.parse(day);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * 获取两个日期之间的所有日期
+     * @param beginDate 开始日期
+     * @param endDate 结束日期
+     * @return
+     */
+    public static List<Date> listDates(Date beginDate, Date endDate){
+        List<Date> result = new ArrayList<>();
+        result.add(beginDate);
+        Date tmp = beginDate;
+        Calendar calendar = Calendar.getInstance();
+        while (tmp.before(endDate)){
+            calendar.setTime(tmp);
+            calendar.add(Calendar.DATE, 1);
+            result.add(calendar.getTime());
+            tmp = calendar.getTime();
+        }
+        return result;
+    }
+
+    /**
+     * 获取两个日期之间的所有日期
+     * @param beginDate 开始日期
+     * @param endDate 结束日期
+     * @return
+     */
+    public static List<String> listDays(Date beginDate, Date endDate){
+        List<String> result = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DAY);
+        List<Date> dateList = listDates(beginDate, endDate);
+        dateList.forEach(o -> result.add(sdf.format(o)));
+        return result;
+    }
+
+    /**
+     * 获取两个日期之间的所有日期
+     * @param beginDay 开始日期
+     * @param endDay 结束日期
+     * @return
+     */
+    public static List<String> listDays(String beginDay, String endDay){
+        List<String> result = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DAY);
+        try {
+            List<Date> dateList = listDates(sdf.parse(beginDay), sdf.parse(endDay));
+            dateList.forEach(o -> result.add(sdf.format(o)));
         } catch (ParseException e) {
             e.printStackTrace();
         }
