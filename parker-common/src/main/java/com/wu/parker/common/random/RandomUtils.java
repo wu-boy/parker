@@ -5,8 +5,8 @@ import java.util.UUID;
 
 /**
  * 随机工具类
- * @author: wusq
- * @date: 2018/11/8
+ * @author wusq
+ * @date 2019/4/23
  */
 public class RandomUtils {
 
@@ -33,15 +33,7 @@ public class RandomUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
-        System.out.println(uuidWithoutBar());
+        System.out.println(uuidWithoutBar().length());
     }
+
 }
