@@ -1,0 +1,5 @@
+global-config:
+  region-id: cn-hangzhou
+  access-key-id: 申请的访问密钥
+  access-secret: 申请的访问密钥
+  sign-name: 创建的签名

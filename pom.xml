@@ -23,6 +23,10 @@
 
     <version>0.0.1-SNAPSHOT</version>
 
+    <build>
+        <finalName>parker</finalName>
+    </build>
+
     <modules>
         <module>parker-areadata</module>
         <module>parker-common</module>
@@ -40,6 +44,7 @@
         <module>parker-schedule</module>
         <module>parker-shiro-base</module>
         <module>parker-shiro-stateless</module>
+        <module>parker-sms</module>
         <module>parker-websocket</module>
     </modules>
 
@@ -57,6 +62,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
+        <aliyun.sdk.core.version>4.4.1</aliyun.sdk.core.version>
         <commons-lang3.version>3.7</commons-lang3.version>
         <cloud.starter.version>2.0.0.RELEASE</cloud.starter.version>
         <easypoi.version>3.3.0</easypoi.version>
@@ -161,11 +167,12 @@
                 <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun.sdk.core.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <finalName>parker</finalName>
-    </build>
 
 </project>
