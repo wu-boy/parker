@@ -14,13 +14,16 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * @author: wusq
- * @date: 2018/12/20
+ * @author wusq
+ * @date 2019/4/29
  */
 @Api(description = "用户服务")
 @RestController
-@RequestMapping("security/user/")
+@RequestMapping("security/user")
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -70,6 +73,34 @@ public class UserController {
             result.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             result.setMessage(e.getMessage());
             log.error("根据ID查询用户错误{}", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @ApiOperation("查询列表")
+    @GetMapping("list")
+    public BaseResult list(){
+        BaseResult result = new BaseResult();
+        try {
+            List<User> list = new ArrayList<>();
+            User o = new User();
+            o.setId("1");
+            o.setUsername("admin");
+            o.setPassword("123456");
+            list.add(o);
+
+            User o2 = new User();
+            o2.setId("2");
+            o2.setUsername("wu");
+            o2.setPassword("111111");
+            list.add(o2);
+
+            result.setData(list);
+        } catch (Exception e) {
+            result.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            result.setMessage(e.getMessage());
+            log.error("查询列表错误{}", e.getMessage());
             e.printStackTrace();
         }
         return result;
