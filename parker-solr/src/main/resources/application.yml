@@ -1,0 +1,4 @@
+spring:
+  data:
+    solr:
+      host: 你的solr服务器地址
