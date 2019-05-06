@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * 函数式编程例子
  * @author wusq
- * @date 2019/4/20
+ * @date 2019/5/6
  */
 public class StreamMain {
 
@@ -76,7 +76,10 @@ public class StreamMain {
      * 年龄排序
      */
     static void sort(){
+        // 升序
         Collections.sort(userDemoList, Comparator.comparing(UserDemo::getAge));
+        // 降序
+        //Collections.sort(userDemoList, Comparator.comparing(UserDemo::getAge).reversed());
     }
 
     /**
@@ -98,9 +101,9 @@ public class StreamMain {
 
         init();
 
-        filter();
+        // filter();
         // joinId();
-        // sort();
+        sort();
         // sum();
         // getIdList();
 
